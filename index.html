@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dark Portfolio</title>
+    <title>Strength before weakness</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
@@ -12,17 +12,83 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Tobias Wilhelm</h1>
-        <p>This is the first draft.</p>
-        <a href="https://github.com/tobwl">Link to github</a>
-
-        <div class="card">
-            <h2>Project</h2>
-            <p>A brief project description</p>
-            <a href="#">View Project</a>
+    <nav class="floating-nav" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a class="brand" href="#">TW</a>
+            <ul class="nav-links">
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#training">Training</a></li>
+                <li><a href="https://github.com/tobwl" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <button class="nav-burger" aria-expanded="false" aria-label="Toggle menu">☰</button>
         </div>
+    </nav>
+
+    <div class="container" id="about">
+        <h1 class="name-gradient">Tobias Wilhelm</h1>
+        <p>Journey before destination.</p>
+        <p>Welcome to my personal website! I'm Tobias Wilhelm, software developer and vocational trainer.</p>
+
+        <div class="card-grid" id="projects">
+            <div class="card">
+                <h2>Custom card reader - Raspberry Pi</h2>
+                <p>For an upcoming internship I am developing a nfc card reader using a Raspberry Pi.</p>
+                <div class="card-actions">
+                    <!-- <button>View Project</button>
+                    <button>GitHub</button> -->
+                </div>
+            </div>
+            <div class="card">
+                <h2>Nintendo Switch Controller - Raspberry</h2>
+                <p>As a private project I'm trying to emulate a Nintendo Switch controller using a Raspberry Pi Zero.</p>
+                <div class="card-actions">
+                    <!-- <button>View Project</button>
+                    <button>GitHub</button> -->
+                </div>
+            </div>
+        </div>
+
+        <div id="training">
+            <h2>Training & Apprenticeship</h2>
+            <p>Since August 2025 I'm also responsible for training apprentices in software development.</p>
+        </div>
+
     </div>
+
+    <script>
+      (function(){
+        const nav = document.querySelector('.floating-nav');
+        const burgerMenu = document.querySelector('.nav-burger');
+
+        // Toggle mobile menu
+        burgerMenu && burgerMenu.addEventListener('click', ()=>{
+          const open = nav.classList.toggle('open');
+          burgerMenu.setAttribute('aria-expanded', open);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e)=>{
+          if(!nav.contains(e.target) && nav.classList.contains('open')){
+            nav.classList.remove('open');
+            burgerMenu.setAttribute('aria-expanded', false);
+          }
+        });
+
+        // Collapse menu when resizing to desktop
+        window.addEventListener('resize', ()=>{
+          if(window.innerWidth > 768){
+            nav.classList.remove('open');
+            burgerMenu && burgerMenu.setAttribute('aria-expanded', false);
+          }
+        });
+
+        // Add small visual change on scroll
+        window.addEventListener('scroll', ()=>{
+          if(window.scrollY > 8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+        });
+      })();
+    </script>
 </body>
 
 </html>
